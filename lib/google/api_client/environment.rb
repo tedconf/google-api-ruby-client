@@ -21,7 +21,7 @@ module Google
           # TODO(bobaman)
           # Confirm that all of these Windows environments actually have access
           # to the `ver` command.
-          `ver`.sub(/\s*\[Version\s*/, '/').sub(']', '').strip
+          `ver`.sub(/\s*\[Version\s*/, '/').sub(']', '')
         elsif RUBY_PLATFORM =~ /darwin/i
           "Mac OS X/#{`sw_vers -productVersion`}"
         elsif RUBY_PLATFORM == 'java'
@@ -33,8 +33,8 @@ module Google
           "#{name}/#{version}"
         else
           `uname -sr`.sub(' ', '/')
-        end
-      rescue Exception
+        end.strip
+      rescue
         RUBY_PLATFORM
       end
     end
